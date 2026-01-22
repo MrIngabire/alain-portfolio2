@@ -250,8 +250,8 @@ export default function App() {
           </div>
           <div className="text-right flex flex-col items-center md:items-end">
             <div className="flex space-x-6 mb-6">
-                <a href="https://github.com/MrIngabire" className="text-gray-500 hover:text-white transition-colors"><Github size={20}/></a>
-                <a href="www.linkedin.com/in/ingabire-alain-893327309" className="text-gray-500 hover:text-emerald-500 transition-colors"><Linkedin size={20}/></a>
+                <a href="https://github.com/MrIngabire" target='_blank' className="text-gray-500 hover:text-white transition-colors"><Github size={20}/></a>
+                <a href="www.linkedin.com/in/ingabire-alain-893327309" target='_blank' className="text-gray-500 hover:text-emerald-500 transition-colors"><Linkedin size={20}/></a>
             </div>
             <p className="font-mono text-[9px] text-gray-700 uppercase tracking-[0.3em]">ID: BBICTR/2023/69217</p>
             <p className="text-[10px] text-gray-800 mt-2 italic font-bold">Mount Kigali University | BBICT Dept</p>
