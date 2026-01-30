@@ -4,8 +4,53 @@ import {
   Code, Briefcase, GraduationCap, Mail, Phone, Linkedin, Github, 
   ChevronDown, Sparkles, User, Cpu, Globe, Database, 
   Terminal, Brain, Server, Award, Smartphone, MessageSquare, Shield, Zap, 
-  Sun, Moon, TrendingUp, BarChart3, Rocket, CheckCircle, Menu, X
+  Sun, Moon, TrendingUp, BarChart3, Rocket, CheckCircle, Menu, X, ExternalLink, Clapperboard, SearchIcon
 } from 'lucide-react';
+
+// --- DATA ARRAYS ---
+
+const projects = [
+  {
+    title: "Movie Bazzer",
+    description: "Built a dynamic React-TMDB movie discovery platform managing real-time data fetching and asynchronous states, leveraging Frontend Engineering proficiency.",
+    icon: <Clapperboard className="w-10 h-10 sm:w-12 sm:h-12 text-emerald-500 mb-6" />,
+    link: "https://movie-bazer-rose.vercel.app/",
+    github: "https://github.com/MrIngabire/movie-bazer",
+    type: "Web App",
+    highlight: true,
+    status: "Live"
+  },
+  {
+    title: "Lost and Found",
+    description: "Built a responsive React-Firebase web application managing item recovery and user authentication, leveraging Real-time Database proficiency.",
+    icon: <SearchIcon className="w-10 h-10 sm:w-12 sm:h-12 text-blue-400 mb-6" />,
+    link: "https://lf-nwni550k8-mr-ingabires-projects.vercel.app/",
+    github: "https://github.com/MrIngabire/LOST-AND-FOUND",
+    type: "Web App",
+    highlight: false,
+    status: "Live"
+  },
+  {
+    title: "Business Solution",
+    description: "Built a secure Django-React web application managing inventory and transactions, leveraging E-commerce proficiency.",
+    icon: <Database className="w-10 h-10 sm:w-12 sm:h-12 text-blue-400 mb-6" />,
+    link: "#", 
+    github: "https://github.com/MrIngabire/",
+    type: "Enterprise",
+    highlight: false,
+    status: "In Progress"
+  },
+  {
+    title: "AI Task Streamliner",
+    description: "Automating business allocation using Python and AI logic. Focuses on reducing operational overhead with custom algorithms.",
+    icon: <Brain className="w-10 h-10 sm:w-12 sm:h-12 text-emerald-500 mb-6" />,
+    link: "#",
+    github: "https://github.com/MrIngabire", 
+    type: "Automation",
+    highlight: true,
+    status: "In Progress"
+  },
+];
 
 const certifications = [
   { name: "Legacy Responsive Web Design", org: "freeCodeCamp", date: "Sept 2025", icon: <Code className="text-orange-500" /> },
@@ -33,7 +78,7 @@ const navItems = [
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Mobile Menu State
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
 
   useEffect(() => {
@@ -49,7 +94,6 @@ export default function App() {
   return (
     <div className={`${isDarkMode ? 'bg-gray-950 text-gray-100' : 'bg-white text-gray-900'} min-h-screen transition-colors duration-500`}>
       
-      {/* QUICK CONTACT FAB (Adjusted for mobile touch) */}
       <motion.a 
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
@@ -61,7 +105,6 @@ export default function App() {
         <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6" />
       </motion.a>
 
-      {/* NAVIGATION */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled || isMenuOpen ? 'glass-effect py-3 shadow-xl' : 'bg-transparent py-6'}`}>
         <div className="container mx-auto px-5 flex justify-between items-center">
           <div className="flex items-center space-x-2">
@@ -70,7 +113,6 @@ export default function App() {
           </div>
           
           <div className="flex items-center space-x-2 md:space-x-8">
-            {/* Desktop Links */}
             <div className="hidden lg:flex space-x-6 uppercase tracking-widest text-[10px] font-bold">
               {navItems.map(item => (
                 <a key={item.id} href={`#${item.id}`} className={`${secondaryText} hover:text-emerald-500 transition-colors`}>{item.label}</a>
@@ -81,17 +123,12 @@ export default function App() {
               {isDarkMode ? <Sun className="w-4 h-4 text-yellow-400" /> : <Moon className="w-4 h-4 text-emerald-600" />}
             </button>
 
-            {/* Mobile Menu Button */}
-            <button 
-              onClick={() => setIsMenuOpen(!isMenuOpen)} 
-              className="lg:hidden p-2 text-emerald-500 focus:outline-none"
-            >
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="lg:hidden p-2 text-emerald-500 focus:outline-none">
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Dropdown Menu */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div 
@@ -102,12 +139,7 @@ export default function App() {
             >
               <div className="flex flex-col p-6 space-y-4">
                 {navItems.map(item => (
-                  <a 
-                    key={item.id} 
-                    href={`#${item.id}`} 
-                    onClick={() => setIsMenuOpen(false)}
-                    className="text-lg font-bold uppercase tracking-widest text-gray-400 hover:text-emerald-500"
-                  >
+                  <a key={item.id} href={`#${item.id}`} onClick={() => setIsMenuOpen(false)} className="text-lg font-bold uppercase tracking-widest text-gray-400 hover:text-emerald-500">
                     {item.label}
                   </a>
                 ))}
@@ -120,19 +152,18 @@ export default function App() {
 
       <main className="container mx-auto px-5 sm:px-10">
         
-        {/* HERO SECTION (Responsive Order & Sizing) */}
         <section id="home" className="min-h-screen flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-16 pt-32 pb-20">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex-1 text-center lg:text-left order-2 lg:order-1">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-[10px] sm:text-xs font-bold mb-6 italic tracking-widest">
               <Sparkles className="w-3 h-3 mr-2" /> Bridging Business Logic & Technical Architecture
             </div>
             <h1 className={`text-4xl sm:text-6xl lg:text-8xl font-black mb-6 leading-tight tracking-tighter italic ${primaryText}`}>Engineering <span className="text-emerald-500">VALUE.</span></h1>
-            <h2 className={`text-3xl sm:text-6xl lg:text-6xl font-black mb-6 leading-tight tracking-tighter  ${primaryText}`}>INGABIRE Alain.</h2>
+            <h2 className={`text-3xl sm:text-6xl lg:text-6xl font-black mb-6 leading-tight tracking-tighter ${primaryText}`}>INGABIRE Alain.</h2>
             <p className={`${secondaryText} text-md sm:text-lg lg:text-xl mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed`}>
               Final-year BBICT student at Mount Kigali University. Architecting <span className={`${primaryText} font-medium`}>Scalable Backend Systems</span> and <span className={`${primaryText} font-medium`}>Enterprise Solutions</span>.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-              <a href="#projects" className="w-full sm:w-auto px-10 py-4 bg-emerald-500 text-white rounded-2xl font-bold shadow-xl shadow-emerald-500/20 hover:scale-105 transition-all">View Work</a>
+              <a href="#projects" className="w-full sm:w-auto px-10 py-4 bg-emerald-500 text-white rounded-2xl font-bold shadow-xl shadow-emerald-500/20 hover:scale-105 transition-all text-center">View Work</a>
               <div className="flex items-center space-x-4 px-4 border-l border-gray-800">
                 <TrendingUp className="w-5 h-5 text-emerald-500" />
                 <span className={`text-[10px] sm:text-xs font-bold uppercase tracking-widest ${secondaryText}`}>Forex Strategy & <br className="hidden sm:block" />QuickBooks Proficient</span>
@@ -140,15 +171,10 @@ export default function App() {
             </div>
           </motion.div>
 
-          {/* PROFILE IMAGE (Adjusted for Mobile Aspect Ratio) */}
           <div className="order-1 lg:order-2 relative w-56 h-72 sm:w-72 sm:h-80 md:w-96 md:h-[28rem]">
             <div className="absolute inset-0 bg-emerald-500/20 rounded-[2rem] sm:rounded-[3rem] blur-2xl animate-pulse"></div>
             <div className="relative w-full h-full bg-gray-900 rounded-[2rem] sm:rounded-[3rem] border-2 border-emerald-500/30 overflow-hidden shadow-2xl">
-              <img 
-                src="alain-profile.jpg" 
-                alt="Alain Ingabire" 
-                className="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-700 ease-in-out" 
-              />
+              <img src="alain-profile.jpg" alt="Alain Ingabire" className="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-700 ease-in-out" />
             </div>
             <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 glass-effect p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-emerald-500/30 shadow-2xl animate-float">
               <div className="flex items-center space-x-3 text-left">
@@ -162,7 +188,63 @@ export default function App() {
           </div>
         </section>
 
-        {/* SKILLS BENTO GRID (Stacking for Mobile) */}
+        {/* PROJECTS SECTION */}
+        <section id="projects" className="py-20 border-t border-gray-900">
+          <h2 className={`text-3xl sm:text-4xl font-black mb-12 italic tracking-tighter uppercase ${primaryText}`}>Selected_Works</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            {projects.map((project, index) => (
+              <motion.div 
+                key={index} 
+                whileHover={{ y: -5 }} 
+                className={`flex flex-col p-8 sm:p-10 rounded-[2rem] sm:rounded-[3rem] border-2 transition-all duration-300 relative overflow-hidden
+                  ${project.highlight ? 'bg-gray-900/50 border-emerald-500/30' : `${cardBg} border-gray-800`}`}
+              >
+                {/* Status Badge */}
+                {project.status === "In Progress" && (
+                  <div className="absolute top-6 right-6 flex items-center gap-2 px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full">
+                    <div className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse" />
+                    <span className="text-[9px] font-bold text-amber-500 uppercase tracking-widest">Under Development</span>
+                  </div>
+                )}
+
+                <div className="mb-auto">
+                  {project.icon}
+                  <div className="flex justify-between items-start mb-4">
+                    <h3 className={`text-2xl sm:text-3xl font-bold ${primaryText}`}>{project.title}</h3>
+                    <span className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest px-2 py-1 bg-emerald-500/10 rounded-md border border-emerald-500/20">
+                      {project.type}
+                    </span>
+                  </div>
+                  <p className={`${secondaryText} mb-10 leading-relaxed text-xs sm:text-sm`}>
+                    {project.description}
+                  </p>
+                </div>
+                
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <a 
+                    href={project.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={`flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-xs transition-colors
+                      ${project.status === "In Progress" ? 'bg-gray-800 text-gray-500 cursor-not-allowed pointer-events-none' : 'bg-emerald-500 text-white hover:bg-emerald-600'}`}
+                  >
+                    {project.status === "In Progress" ? "Demo Coming Soon" : <>View Project <ExternalLink size={14} /></>}
+                  </a>
+                  <a 
+                    href={project.github} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="px-6 py-3 border border-emerald-500/30 text-emerald-500 rounded-xl font-bold text-xs hover:bg-emerald-500/5 transition-all text-center flex items-center justify-center gap-2"
+                  >
+                    View Code <Github size={14} />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* SKILLS BENTO GRID */}
         <section id="skills" className="py-20 border-t border-gray-900">
           <h2 className={`text-2xl sm:text-3xl font-black mb-12 italic text-center uppercase tracking-widest underline decoration-emerald-500 underline-offset-8 ${primaryText}`}>Capability_Grid</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -184,7 +266,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* ACADEMIC COMPETENCIES (Grid for all screens) */}
         <section className="py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {competencies.map((comp, i) => (
             <div key={i} className={`glass-effect p-6 rounded-2xl border border-gray-800 text-center ${cardBg}`}>
@@ -196,28 +277,6 @@ export default function App() {
           ))}
         </section>
 
-        {/* PROJECTS (Stacking for Mobile) */}
-        <section id="projects" className="py-20 border-t border-gray-900">
-          <h2 className={`text-3xl sm:text-4xl font-black mb-12 italic tracking-tighter uppercase ${primaryText}`}>Selected_Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            <motion.div whileHover={{ y: -5 }} className="p-8 sm:p-10 rounded-[2rem] sm:rounded-[3rem] bg-gray-900/50 border-2 border-emerald-500/30">
-              <Brain className="w-10 h-10 sm:w-12 sm:h-12 text-emerald-500 mb-6 sm:mb-8" />
-              <h3 className="text-2xl sm:text-3xl font-bold mb-4 text-white">AI Task Streamliner</h3>
-              <p className="text-gray-400 mb-8 sm:mb-10 leading-relaxed text-xs sm:text-sm">Automating business allocation using Python and AI logic. Focuses on reducing operational overhead with custom algorithms.</p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <button className="w-full sm:w-auto px-6 py-2 bg-emerald-500 text-white rounded-xl font-bold text-xs">Case Study</button>
-                <button className="w-full sm:w-auto px-6 py-2 border border-emerald-500/30 text-white rounded-xl font-bold text-xs">Logic Flow</button>
-              </div>
-            </motion.div>
-            <motion.div whileHover={{ y: -5 }} className={`p-8 sm:p-10 rounded-[2rem] sm:rounded-[3rem] border-2 border-gray-800 ${cardBg}`}>
-              <Database className="w-10 h-10 sm:w-12 sm:h-12 text-blue-400 mb-6 sm:mb-8" />
-              <h3 className={`text-2xl sm:text-3xl font-bold mb-4 ${primaryText}`}>Business Solution</h3>
-              <p className={`${secondaryText} mb-10 leading-relaxed text-xs sm:text-sm`}>Built a secure Django-React web application managing inventory and transactions, leveraging E-commerce proficiency.</p>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* EXPERIENCE (Improved padding for touch) */}
         <section id="experience" className="py-20 border-t border-gray-900">
           <div className="max-w-4xl mx-auto">
             <h2 className={`text-2xl sm:text-3xl font-bold mb-12 text-center italic uppercase underline underline-offset-8 decoration-emerald-500 ${primaryText}`}>Professional_Journey</h2>
@@ -238,7 +297,6 @@ export default function App() {
 
       </main>
 
-      {/* FOOTER (Responsive Flex) */}
       <footer id="contact" className="bg-gray-900/50 py-16 sm:py-24 border-t border-gray-800 mt-20 text-center md:text-left">
         <div className="container mx-auto px-5 grid md:grid-cols-2 gap-12 items-center">
           <div>
@@ -250,8 +308,8 @@ export default function App() {
           </div>
           <div className="text-right flex flex-col items-center md:items-end">
             <div className="flex space-x-6 mb-6">
-                <a href="https://github.com/MrIngabire" target='_blank' className="text-gray-500 hover:text-white transition-colors"><Github size={20}/></a>
-                <a href="www.linkedin.com/in/ingabire-alain-893327309" target='_blank' className="text-gray-500 hover:text-emerald-500 transition-colors"><Linkedin size={20}/></a>
+                <a href="https://github.com/MrIngabire" target='_blank' rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors"><Github size={20}/></a>
+                <a href="https://www.linkedin.com/in/MrIngabire" target='_blank' rel="noopener noreferrer" className="text-gray-500 hover:text-emerald-500 transition-colors"><Linkedin size={20}/></a>
             </div>
             <p className="font-mono text-[9px] text-gray-700 uppercase tracking-[0.3em]">ID: BBICTR/2023/69217</p>
             <p className="text-[10px] text-gray-800 mt-2 italic font-bold">Mount Kigali University | BBICT Dept</p>
